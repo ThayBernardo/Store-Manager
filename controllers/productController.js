@@ -12,6 +12,12 @@ const productController = {
     if (!data) return res.status(404).json({ message: 'Product not found' });
     res.status(200).json(data);
   },
+
+  create: async (req, res) => {
+    const { name } = req.body;
+    const data = await productService.create(name);
+    res.status(201).json(data);
+  },
 };
 
 module.exports = productController;
