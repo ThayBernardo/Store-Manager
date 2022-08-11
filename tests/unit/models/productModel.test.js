@@ -45,4 +45,17 @@ describe('Listagem de produtos', () => {
       expect(products).to.be.all.keys('id', 'name');
     });
   });
+  describe('Criando produtos', () => {
+    const fakeDataId = {
+      "id": 2,
+      "name": "Traje de encolhimento"
+    };
+
+    it('Adiciona novo produto', async () => {
+      sinon.stub(connection, 'query').resolves([[fakeDataId]]);
+
+      const product = await productModel.create();
+      expect(product).to.be.all.keys('id', 'name');
+    });
+  });
 });

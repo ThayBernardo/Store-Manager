@@ -12,8 +12,6 @@ app.get('/products/:id', productController.getById);
 app.post('/products', validate.validateBody, productController.create);
 
 app.use((err, _req, res, _next) => {
-  // const { code, message } = err;
-  console.log(err.code);
   res.status(err.code).json({ message: err.message });
 });
 
