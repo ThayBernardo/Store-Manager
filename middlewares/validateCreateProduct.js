@@ -1,7 +1,7 @@
 const Joi = require('joi');
 
 const validation = {
-  validateBody: async (req, res, next) => {
+  validateBody: async (req, _res, next) => {
       const schema = Joi.object({
         name: Joi.string().min(5).required(),
       });
