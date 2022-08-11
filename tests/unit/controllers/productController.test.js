@@ -53,4 +53,5 @@ describe('ProductController', () => {
   //   expect(res.status.calledWith(200)).to.be.equal(true);
   //   expect(res.json.calledWith(fakeDataId)).to.be.equal(true);
   // });
+  //Teste
 });
