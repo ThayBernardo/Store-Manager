@@ -34,6 +34,15 @@ const productService = {
   deleteProduct: async (id) => {
     await productModel.deleteProduct(id);
   },
+
+  registerSale: async (quantity) => {
+    const data = await productModel.registerSale(quantity);
+    return data;
+  },
+
+  deleteSale: async (id) => {
+    await productModel.deleteSale(id);
+  },
 };
 
 module.exports = productService;

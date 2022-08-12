@@ -44,6 +44,18 @@ const productController = {
     await productService.deleteProduct(id);
     res.status(204).send();
   },
+
+  registerSale: async (req, res) => {
+    const { quantity } = req.body;
+    const data = await productService.registerSale(quantity);
+    res.status(201).json(data);
+  },
+
+  deleteSale: async (req, res) => {
+    const { id } = req.params;
+    await productService.deleteSale(id);
+    res.status(204).send();
+  },
 };
 
 module.exports = productController;

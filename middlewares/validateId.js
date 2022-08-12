@@ -8,6 +8,14 @@ const validateId = {
     if (validate.length === 0) return res.status(404).json({ message: 'Product not found' });
     next();
   },
+
+  idSale: async (req, res, next) => {
+    const { id } = req.params;
+    const dataSales = await productModel.getAll();
+    const validate = dataSales.filter((all) => Number(all.id) === Number(id));
+    if (validate.length === 0) return res.status(404).json({ message: 'Sale not found' });
+    next();
+  },
 };
 
 module.exports = validateId;

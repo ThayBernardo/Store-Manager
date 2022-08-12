@@ -51,6 +51,20 @@ const productModel = {
     await connection.query(`DELETE FROM StoreManager.products
     WHERE id = ?`, [id]);
   },
+
+  registerSale: async (quantity) => {
+    const [{ insertId }] = await connection.query(`INSERT INTO StoreManager.sales
+    (date) VALUES (now())`);
+    const [result] = await connection.query(`INSERT INTO StorageManager.sales_products
+    (sale_id, quantity) VALUES (?, ?)`, [insertId, quantity]);
+    console.log(result.id);
+    return result.id;
+  },
+
+  deleteSale: async (id) => {
+    await connection.query(`DELETE FROM StoreManager.sales
+    WHERE id = ?`, [id]);
+  },
 };
 
 module.exports = productModel;  
