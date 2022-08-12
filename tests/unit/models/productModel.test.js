@@ -58,4 +58,32 @@ describe('Listagem de produtos', () => {
       expect(product).to.be.all.keys('id', 'name');
     });
   });
+  describe('Sales', () => {
+    const fakeDataSales = [
+      {
+        "saleId": 1,
+        "productId": 1,
+        "quantity": 5,
+        "date": "2022-08-12T14:41:44.000Z"
+      },
+      {
+        "saleId": 1,
+        "productId": 2,
+        "quantity": 10,
+        "date": "2022-08-12T14:41:44.000Z"
+      },
+      {
+        "saleId": 2,
+        "productId": 3,
+        "quantity": 15,
+        "date": "2022-08-12T14:41:44.000Z"
+      }
+    ];
+    it('Listagem de todos produtos', async () => {
+      sinon.stub(connection, 'query').resolves(fakeDataSales);
+
+      const products = await productModel.getAllSales();
+      expect(products).to.have.all.keys('saleId', 'productId', 'quantity', 'date');
+    });
+  });
 });

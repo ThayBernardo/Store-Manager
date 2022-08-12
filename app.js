@@ -1,6 +1,7 @@
 const express = require('express');
 const productController = require('./controllers/productController');
 const validate = require('./middlewares/validateCreateProduct');
+const validateId = require('./middlewares/validateId');
 require('express-async-errors');
 
 const app = express();
@@ -12,6 +13,7 @@ app.get('/products/:id', productController.getById);
 app.post('/products', validate.validateBody, productController.create);
 app.get('/sales', productController.getAllSales);
 app.get('/sales/:id', productController.getByIdSales);
+app.put('/products/:id', validate.validateBody, validateId.id, productController.updateProduct);
 
 app.use((err, _req, res, _next) => {
   res.status(err.code).json({ message: err.message });

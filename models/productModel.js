@@ -40,6 +40,12 @@ const productModel = {
     ORDER BY sale_id ASC, product_id ASC`, [id]);
     return result;
   },
+
+  updateProduct: async (id, name) => {
+    await connection.query(`UPDATE StoreManager.products
+    SET name = ? WHERE id = ?`, [name, id]);
+    return { name };
+  },
 };
 
 module.exports = productModel;  

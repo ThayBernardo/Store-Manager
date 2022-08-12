@@ -37,11 +37,11 @@ describe('ProductController', () => {
 
   // it('Retorna produtos com seu respectivo id, status 200 e produto', async () => {
   //   const fakeDataId = {
-  //     "name": "Traje de encolhimento"
+  //     "id": 1,
+  //     "name": "Martelo de Thor"
   //   };
-    
-  //   sinon.stub(productModel, 'getById').resolves(fakeDataId);
-  //   sinon.stub(productModel, 'getById').resolves(2);
+
+  //   sinon.stub(productModel, 'getById').resolves(1);
 
   //   const req = {};
   //   const res = {};
@@ -53,5 +53,32 @@ describe('ProductController', () => {
   //   expect(res.status.calledWith(200)).to.be.equal(true);
   //   expect(res.json.calledWith(fakeDataId)).to.be.equal(true);
   // });
-  //Teste
+  const fakeDataSales = [
+    {
+      "id": 1,
+      "name": "Martelo de Thor"
+    },
+    {
+      "id": 2,
+      "name": "Traje de encolhimento"
+    },
+    {
+      "id": 3,
+      "name": "Escudo do Capitão América"
+    }
+  ];
+
+  it('Retorna todos produtos com status 200 e produtos', async () => {
+    sinon.stub(productModel, 'getAllSales').resolves(fakeDataSales);
+
+    const req = {};
+    const res = {};
+
+    res.status = sinon.stub().returns(res);
+    res.json = sinon.stub().returns();
+
+    await productController.getAllSales(req, res);
+    expect(res.status.calledWith(200)).to.be.equal(true);
+    expect(res.json.calledWith(fakeDataSales)).to.be.equal(true);
+  });
 });
