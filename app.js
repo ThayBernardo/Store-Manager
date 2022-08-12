@@ -14,6 +14,7 @@ app.post('/products', validate.validateBody, productController.create);
 app.get('/sales', productController.getAllSales);
 app.get('/sales/:id', productController.getByIdSales);
 app.put('/products/:id', validate.validateBody, validateId.id, productController.updateProduct);
+app.delete('/products/:id', validateId.id, productController.deleteProduct);
 
 app.use((err, _req, res, _next) => {
   res.status(err.code).json({ message: err.message });

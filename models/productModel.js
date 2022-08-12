@@ -46,6 +46,11 @@ const productModel = {
     SET name = ? WHERE id = ?`, [name, id]);
     return { name };
   },
+
+  deleteProduct: async (id) => {
+    await connection.query(`DELETE FROM StoreManager.products
+    WHERE id = ?`, [id]);
+  },
 };
 
 module.exports = productModel;  
