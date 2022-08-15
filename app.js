@@ -1,25 +1,18 @@
 const express = require('express');
-const productController = require('./controllers/productController');
-const validate = require('./middlewares/validateCreateProduct');
-const validateId = require('./middlewares/validateId');
+const productRoute = require('./routes/productRoute');
+const saleRoute = require('./routes/saleRoute');
+const Error = require('./middlewares/error');
 require('express-async-errors');
 
 const app = express();
 
 app.use(express.json());
 
-app.get('/products', productController.getAll);
-app.get('/products/:id', productController.getById);
-app.post('/products', validate.validateBody, productController.create);
-app.get('/sales', productController.getAllSales);
-app.get('/sales/:id', productController.getByIdSales);
-app.put('/products/:id', validate.validateBody, validateId.id, productController.updateProduct);
-app.delete('/products/:id', validateId.id, productController.deleteProduct);
-app.delete('/sales/:id', validateId.idSale, productController.deleteSale);
+app.use('/products', productRoute);
 
-app.use((err, _req, res, _next) => {
-  res.status(err.code).json({ message: err.message });
-});
+app.use('/sales', saleRoute);
+
+app.use(Error.err);
 
 // não remova esse endpoint, é para o avaliador funcionar
 app.get('/', (_request, response) => {

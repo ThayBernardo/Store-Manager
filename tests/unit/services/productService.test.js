@@ -43,38 +43,4 @@ describe('ProductService', () => {
     const createProduct = await productService.create();
     expect(createProduct).to.have.all.keys('id', 'name');
   });
-  describe('Sales', () => {
-    const fakeDataSales = [
-      {
-        "saleId": 1,
-        "productId": 1,
-        "quantity": 5,
-        "date": "2022-08-12T14:41:44.000Z"
-      },
-      {
-        "saleId": 1,
-        "productId": 2,
-        "quantity": 10,
-        "date": "2022-08-12T14:41:44.000Z"
-      },
-      {
-        "saleId": 2,
-        "productId": 3,
-        "quantity": 15,
-        "date": "2022-08-12T14:41:44.000Z"
-      }
-    ]
-    it('Pegar produto pelo sales id', async () => {
-      sinon.stub(productModel, 'getByIdSales').resolves(2);
-
-      const id = await productService.getByIdSales();
-      expect(id).to.be.equal(2);
-    });
-    it('Listagem de todos produtos', async () => {
-      sinon.stub(productModel, 'getAllSales').resolves(fakeDataSales);
-
-      const all = await productService.getAllSales();
-      expect(all).have.lengthOf(3);
-    });
-  });
 });

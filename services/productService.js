@@ -16,16 +16,6 @@ const productService = {
     return data;
   },
 
-  getAllSales: async () => {
-    const data = await productModel.getAllSales();
-    return data;
-  },
-
-  getByIdSales: async (id) => {
-    const data = await productModel.getByIdSales(id);
-    return data;
-  },
-
   updateProduct: async (id, name) => {
     const data = await productModel.updateProduct(id, name);
     return data;
@@ -33,15 +23,6 @@ const productService = {
 
   deleteProduct: async (id) => {
     await productModel.deleteProduct(id);
-  },
-
-  registerSale: async (quantity) => {
-    const data = await productModel.registerSale(quantity);
-    return data;
-  },
-
-  deleteSale: async (id) => {
-    await productModel.deleteSale(id);
   },
 };
 
