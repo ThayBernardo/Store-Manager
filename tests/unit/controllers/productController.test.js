@@ -1,6 +1,6 @@
 const sinon = require('sinon');
 const { expect } = require('chai');
-const productModel = require('../../../services/productService');
+const productService = require('../../../services/productService');
 const productController = require('../../../controllers/productController');
 
 describe('ProductController', () => {
@@ -22,7 +22,7 @@ describe('ProductController', () => {
   ];
 
   it('Retorna todos produtos com status 200 e produtos', async () => {
-    sinon.stub(productModel, 'getAll').resolves(fakeData);
+    sinon.stub(productService, 'getAll').resolves(fakeData);
     
     const req = {};
     const res = {};
@@ -49,7 +49,7 @@ describe('ProductController', () => {
     res.status = sinon.stub().returns(res);
     res.json = sinon.stub().returns();
 
-    sinon.stub(productModel, 'getById').resolves(fakeDataId);
+    sinon.stub(productService, 'getById').resolves(fakeDataId);
 
     await productController.getById(req, res);
     expect(res.status.calledWith(200)).to.be.equal(true);

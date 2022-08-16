@@ -11,8 +11,8 @@ const validateId = {
 
   idSale: async (req, res, next) => {
     const { id } = req.params;
-    const dataSales = await productModel.getAllSales();
-    const validate = dataSales.filter((all) => Number(all.id) === Number(id));
+    const data = await productModel.getAll();
+    const validate = data.filter((all) => Number(all.id) === Number(id));
     if (validate.length === 0) return res.status(404).json({ message: 'Sale not found' });
     next();
   },
