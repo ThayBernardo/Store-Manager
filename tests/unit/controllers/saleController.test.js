@@ -34,4 +34,5 @@ describe('Sales', () => {
     expect(res.status.calledWith(200)).to.be.equal(true);
     expect(res.json.calledWith(fakeDataSales)).to.be.equal(true);
   });
+  //teste
 });
