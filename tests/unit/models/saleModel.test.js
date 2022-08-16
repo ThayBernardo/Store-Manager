@@ -32,21 +32,21 @@ describe('Sales', () => {
     const products = await saleModel.getAllSales();
     expect(products).to.have.all.keys('saleId', 'productId', 'quantity', 'date');
   });
-});
-describe('Sale por id', () => {
-  const fakeDataId = [
-    {
-      "productId": 3,
-      "quantity": 5,
-      "date": "2022-08-15T17:40:39.000Z"
-    }
-  ];
+  describe('Sale por id', () => {
+    const fakeDataId = [
+      {
+        "productId": 3,
+        "quantity": 5,
+        "date": "2022-08-15T17:40:39.000Z"
+      }
+    ];
 
-  it('Se possui as chaves id e name', async () => {
-    sinon.stub(connection, 'query').resolves(fakeDataId);
+    it('Se possui as chaves productId, quantity e date', async () => {
+      sinon.stub(connection, 'query').resolves(fakeDataId);
 
-    const products = await saleModel.getByIdSales();
-    expect(products).to.be.all.keys('productId', 'quantity', 'date');
+      const products = await saleModel.getByIdSales();
+      expect(products).to.be.all.keys('productId', 'quantity', 'date');
+    });
   });
 });
   // describe('Update product', () => {
