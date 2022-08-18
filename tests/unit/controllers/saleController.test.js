@@ -34,5 +34,42 @@ describe('Sales', () => {
     expect(res.status.calledWith(200)).to.be.equal(true);
     expect(res.json.calledWith(fakeDataSales)).to.be.equal(true);
   });
-  //teste
+
+  it('Retorna sale com seu respectivo id, status 200 e produto', async () => {
+    const fakeDataId =
+    {
+      "id": 1,
+      "name": "Martelo de Thor"
+    }
+
+    const req = {};
+    const res = {};
+
+    req.params = { id: 1 }
+    res.status = sinon.stub().returns(res);
+    res.json = sinon.stub().returns();
+
+    sinon.stub(saleService, 'getByIdSales').resolves(fakeDataId);
+
+    await saleController.getByIdSales(req, res);
+    expect(res.status.calledWith(200)).to.be.equal(true);
+    expect(res.json.calledWith(fakeDataId)).to.be.equal(true);
+  });
+
+  it('Ao deletar retorna status 204', async () => {
+    const item = { 'id': 2 }
+
+    const req = {};
+    const res = {};
+
+    req.params = { id: 2 }
+    res.status = sinon.stub().returns(res);
+    res.send = sinon.stub().returns();
+
+    sinon.stub(saleService, 'deleteSale').resolves(item);
+
+    await saleController.deleteSale(req, res);
+    expect(res.status.calledWith(204)).to.be.equal(true);
+    expect(res.send.calledWith()).to.be.equal(true);
+  });
 });

@@ -13,25 +13,11 @@ const saleController = {
     res.status(200).json(data);
   },
 
-  registerSale: async (req, res) => {
-    const { quantity } = req.body;
-    const data = await saleService.registerSale(quantity);
-    res.status(201).json(data);
-  },
-
   deleteSale: async (req, res) => {
     const { id } = req.params;
     await saleService.deleteSale(id);
     res.status(204).send();
   },
-
-  updateSale: async (req, res) => {
-    const { id } = req.params;
-    const { productId, quantity } = req.body;
-    const data = await saleService.updateSale(id, productId, quantity);
-    res.status(200).json(data);
-  },
-
 };
 
 module.exports = saleController;

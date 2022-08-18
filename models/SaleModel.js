@@ -24,26 +24,9 @@ const saleModel = {
     return result;
   },
 
-  registerSale: async (quantity) => {
-    const [{ insertId }] = await connection.query(`INSERT INTO StoreManager.sales
-    (date) VALUES (now())`);
-    const [result] = await connection.query(`INSERT INTO StorageManager.sales_products
-    (sale_id, quantity) VALUES (?, ?)`, [insertId, quantity]);
-    console.log(result.id);
-    return result.id;
-  },
-
   deleteSale: async (id) => {
     await connection.query(`DELETE FROM StoreManager.sales
     WHERE id = ?`, [id]);
-  },
-
-  updateSale: async (id, productId, quantity) => {
-    const [result] = await connection.query(`UPDATE StoreManager.sales_products 
-    SET quantity = ?, product_id = ?
-    WHERE sale_id = ?`, [quantity, productId, id]);
-    console.log(result);
-    return result;
   },
 };
 

@@ -56,20 +56,56 @@ describe('ProductController', () => {
     expect(res.json.calledWith(fakeDataId)).to.be.equal(true);
   });
 
-  // it('Retorna status 404 e mensagem de erro caso não exista id', async () => {
-  //   const status = { message: 'Product not found' };
+  it('Criação se tudo der certo, status 201 e nome do produto', async () => {
+    const newProduct = { 'name': 'Barbie' };
 
-  //   const req = {};
-  //   const res = {};
+    const req = {};
+    const res = {};
 
-  //   req.params = { id: 1 }
-  //   res.status = sinon.stub().returns(res);
-  //   res.json = sinon.stub().returns();
+    req.params = { id: 2 }
+    req.body = { 'name': 'Barbie' };
+    res.status = sinon.stub().returns(res);
+    res.json = sinon.stub().returns();
 
-  //   sinon.stub(productModel, 'getById').resolves(status);
+    sinon.stub(productService, 'create').resolves(newProduct);
 
-  //   await productController.getById(req, res);
-  //   expect(res.status.calledWith(404)).to.be.equal(true);
-  //   expect(res.json.calledWith(status)).to.be.equal(true);
-  // });
+    await productController.create(req, res);
+    expect(res.status.calledWith(201)).to.be.equal(true);
+    expect(res.json.calledWith(newProduct)).to.be.equal(true);
+  });
+
+  it('Atualizar, se tudo der certo, status 200, id e nome', async () => {
+    const updateProduct = { 'id': 2, 'name': 'Barbie' };
+
+    const req = {};
+    const res = {};
+
+    req.params = { id: 2 }
+    req.body = { 'name': 'Barbie' };
+    res.status = sinon.stub().returns(res);
+    res.json = sinon.stub().returns();
+
+    sinon.stub(productService, 'updateProduct').resolves(updateProduct);
+
+    await productController.updateProduct(req, res);
+    expect(res.status.calledWith(200)).to.be.equal(true);
+    expect(res.json.calledWith(updateProduct)).to.be.equal(true);
+  });
+
+  it('Ao deletar retorna status 204', async () => {
+    const item = { 'id': 2 }
+
+    const req = {};
+    const res = {};
+
+    req.params = { id: 2 }
+    res.status = sinon.stub().returns(res);
+    res.send = sinon.stub().returns();
+
+    sinon.stub(productService, 'deleteProduct').resolves(item);
+
+    await productController.deleteProduct(req, res);
+    expect(res.status.calledWith(204)).to.be.equal(true);
+    expect(res.send.calledWith()).to.be.equal(true);
+  });
 });

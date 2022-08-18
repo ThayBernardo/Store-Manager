@@ -43,4 +43,17 @@ describe('ProductService', () => {
     const createProduct = await productService.create();
     expect(createProduct).to.have.all.keys('id', 'name');
   });
+
+  it('Atualizar produto', async () => {
+    const product = { 'id': 2, 'name': 'Barbie' };
+    sinon.stub(productModel, 'updateProduct').resolves(product);
+
+    const update = await productService.updateProduct();
+    expect(update.name).to.be.equal('Barbie');
+  });
+
+  it('Deletar produto', async () => {
+    sinon.stub(productModel, 'deleteProduct').resolves();
+    await productService.deleteProduct();
+  });
 });

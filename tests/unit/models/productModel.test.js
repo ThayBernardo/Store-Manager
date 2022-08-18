@@ -58,4 +58,23 @@ describe('Listagem de produtos', () => {
       expect(product).to.be.all.keys('id', 'name');
     });
   });
+  describe('Update', () => {
+    it('Retorna produto editado', async () => {
+      sinon.stub(connection, 'query').resolves();
+      const product = await productModel.updateProduct(
+        2,
+        'Barbie');
+
+      expect(product).to.be.a('object');
+      expect(product).to.have.all.keys('name');
+      expect(product.name).to.be.equal('Barbie');
+    });
+  });
+
+  describe('Deleta', () => {
+    it('Retorna id do produto deletado', async () => {
+      sinon.stub(connection, 'query').resolves();
+      await productModel.deleteProduct(2);
+    });
+  });
 });

@@ -48,29 +48,10 @@ describe('Sales', () => {
       expect(products).to.be.all.keys('productId', 'quantity', 'date');
     });
   });
+    describe('Excluir sale', () => {
+      it('Se retorna id do sale deletado', async () => {
+        sinon.stub(connection, 'query').resolves();
+        await saleModel.deleteSale(2);
+    });
+  });
 });
-  // describe('Update product', () => {
-  //   const fakeDataUpdate =
-  //   {
-  //     id: 4,
-  //     name: "Teste"
-  //   }
-
-  //   sinon.stub(connection, 'query').resolves();
-
-  //   it('Se atualiza corretamente', async () => {
-  //     const product = await saleModel.updateProduct(fakeDataUpdate);
-  //     expect(product).to.be.all.keys('id', 'name');
-  //     expect(product.id).to.be.equal(4);
-  //     expect(product.name).to.be.equal('Teste');
-  //   });
-  // });
-
-  // describe('Excluir sale', () => {
-  //   sinon.stub(connection, 'query').resolves();
-
-  //   it('Se retorna id do sale deletado', async () => {
-  //     const id = await saleModel.deleteProduct(2);
-  //     expect(id).to.be.equal(2);
-  //   });
-  // });

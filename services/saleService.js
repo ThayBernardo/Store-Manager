@@ -11,18 +11,8 @@ const saleService = {
     return data;
   },
 
-  registerSale: async (quantity) => {
-    const data = await saleModel.registerSale(quantity);
-    return data;
-  },
-
   deleteSale: async (id) => {
     await saleModel.deleteSale(id);
-  },
-
-  updateSale: async (id, productId, quantity) => {
-    const data = await saleModel.updateSale(id, productId, quantity);
-    return data;
   },
 };
 

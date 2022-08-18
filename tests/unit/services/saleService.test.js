@@ -38,4 +38,9 @@ describe('Sales', () => {
     const all = await saleService.getAllSales();
     expect(all).have.lengthOf(3);
   });
+
+  it('Deletar sale', async () => {
+    sinon.stub(saleModel, 'deleteSale').resolves();
+    await saleService.deleteSale();
+  });
 });
